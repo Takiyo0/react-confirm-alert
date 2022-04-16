@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { render, unmountComponentAtNode } from 'react-dom'
+import { unmountComponentAtNode } from 'react-dom'
+import { createRoot } from "react-dom/client"
+
+const render = createRoot(document.body).render;
 
 export default class ReactConfirmAlert extends Component {
   static propTypes = {
@@ -100,7 +103,7 @@ export default class ReactConfirmAlert extends Component {
     return customUI(dataCustomUI)
   }
 
-  render () {
+  render() {
     const { title, message, buttons, childrenElement, customUI, overlayClassName } = this.props
 
     return (
@@ -132,7 +135,7 @@ export default class ReactConfirmAlert extends Component {
   }
 }
 
-function createSVGBlurReconfirm () {
+function createSVGBlurReconfirm() {
   // If has svg ignore to create the svg
   const svg = document.getElementById('react-confirm-alert-firm-svg')
   if (svg) return
@@ -152,7 +155,7 @@ function createSVGBlurReconfirm () {
   document.body.appendChild(svgElem)
 }
 
-function removeSVGBlurReconfirm (afterClose) {
+function removeSVGBlurReconfirm(afterClose) {
   const svg = document.getElementById('react-confirm-alert-firm-svg')
   if (svg) {
     svg.parentNode.removeChild(svg)
@@ -161,7 +164,7 @@ function removeSVGBlurReconfirm (afterClose) {
   afterClose()
 }
 
-function createElementReconfirm (properties) {
+function createElementReconfirm(properties) {
   let divTarget = document.getElementById('react-confirm-alert')
   if (divTarget) {
     // Rerender - the mounted ReactConfirmAlert
@@ -176,7 +179,7 @@ function createElementReconfirm (properties) {
   }
 }
 
-function removeElementReconfirm () {
+function removeElementReconfirm() {
   const target = document.getElementById('react-confirm-alert')
   if (target) {
     unmountComponentAtNode(target)
@@ -184,15 +187,15 @@ function removeElementReconfirm () {
   }
 }
 
-function addBodyClass () {
+function addBodyClass() {
   document.body.classList.add('react-confirm-alert-body-element')
 }
 
-function removeBodyClass () {
+function removeBodyClass() {
   document.body.classList.remove('react-confirm-alert-body-element')
 }
 
-export function confirmAlert (properties) {
+export function confirmAlert(properties) {
   addBodyClass()
   createSVGBlurReconfirm()
   createElementReconfirm(properties)
